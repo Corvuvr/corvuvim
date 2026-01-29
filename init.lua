@@ -34,10 +34,3 @@ require("lazy").setup(plugins, {})
 require("mappings").setup()
 require("colorscheme").setup()
 
--- Workaround for jdtls to load external packages
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'java',
-    callback = function(args)
-        require('configs.nvim-jdtls').setup()
-    end
-})

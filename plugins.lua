@@ -101,7 +101,6 @@ return {
           "neovim/nvim-lspconfig",
         },
         event = "VeryLazy",
-        config = function() end,
     },
 
 
@@ -152,6 +151,15 @@ return {
     {
         "williamboman/mason.nvim",
         opts = { ensure_installed = { "codelldb", "pyright", "jdtls" }, },
+        config = function() 
+            -- Workaround for jdtls to load external packages
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'java',
+                callback = function(args)
+                    require('configs.nvim-jdtls').setup()
+                end
+            })
+        end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
