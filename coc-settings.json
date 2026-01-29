@@ -7,6 +7,6 @@
             "rootPatterns": [".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git", "CMakeLists.txt"],
             "trace.server": "verbose",
             "filetypes": [ "h", "hpp", "c", "cc", "cpp", "c++", "cxx", "objc", "objcpp", "cuda"]
-        },
+        }
     }
 }

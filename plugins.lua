@@ -94,6 +94,16 @@ return {
         lazy = false, 
         branch = "release", 
     },
+    {
+        "mfussenegger/nvim-jdtls",
+        dependencies = {
+          "mfussenegger/nvim-dap",
+          "neovim/nvim-lspconfig",
+        },
+        event = "VeryLazy",
+        config = function() end,
+    },
+
 
     -- DAP
     {
@@ -141,11 +151,13 @@ return {
     -- MASON
     {
         "williamboman/mason.nvim",
-        opts = { ensure_installed = { "codelldb", "pyright" }, },
+        opts = { ensure_installed = { "codelldb", "pyright", "jdtls" }, },
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        opts = {},
+        opts = {
+            automatic_enable = { exclude = { 'jdtls' } }
+        },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",
