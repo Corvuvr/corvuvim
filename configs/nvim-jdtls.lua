@@ -2,25 +2,17 @@
 local M = {}
 
 function M:setup()
-    local root_dir = vim.fs.root(
-        0, {'gradlew', '.git', 'mvnw'}
-    )
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+    local workspace_dir = "/home/corvur/.workspaces" .. project_name
     local config = {
         
         name = "jdtls",
 
         -- `root_dir` must point to the root of your project.
         -- See `:help vim.fs.root`
-        root_dir = root_dir,
+        root_dir = vim.fs.root(0, {'gradlew', '.git', 'mvnw'}),
 
-        -- `cmd` defines the executable to launch eclipse.jdt.ls.
-        -- `jdtls` must be available in $PATH and you must have Python3.9 for this to work.
-        --
-        -- As alternative you could also avoid the `jdtls` wrapper and launch
-        -- eclipse.jdt.ls via the `java` executable
-        -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
         cmd = {
-            -- "jdtls"
             "java", -- Must be 21
 	        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
 	        "-Dosgi.bundles.defaultStartLevel=4",
@@ -37,7 +29,7 @@ function M:setup()
 	        "-jar", "/home/corvur/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.7.100.v20251111-0406.jar",
             -- cmd: sudo find / -name config_linux 
 	        "-configuration", "/home/corvur/.local/share/nvim/mason/packages/jdtls/config_linux",
-	        "-data", root_dir
+	        "-data", workspace_dir
         },
       
       
