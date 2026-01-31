@@ -60,19 +60,26 @@ return {
     },
 
     -- Refactoring
-    {"nvim-lua/plenary.nvim"},
-    {"nvim-treesitter/playground"},
     {
         "nvim-treesitter/nvim-treesitter",
         -- Call TSInstall python if you need syntax highlighting
         config = function() 
-            require ('nvim-treesitter.configs').setup {
+            require ('nvim-treesitter.config').setup {
                 highlight = {
                     enable = true,
                 }
             }
         end,
     },
+    {
+        "nvim-lua/plenary.nvim"
+    },
+    -- {
+    --     "nvim-treesitter/playground", -- Provides :Inspect command
+    --     requires = {
+    --         {"nvim-treesitter/nvim-treesitter"}
+    --     },
+    -- }, 
     {
         "ThePrimeagen/refactoring.nvim",
         requires = {
@@ -149,9 +156,10 @@ return {
 
     -- MASON
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = { ensure_installed = { "codelldb", "pyright", "jdtls" }, },
         config = function() 
+            require("mason").setup()
             -- Workaround for jdtls to load external packages
             vim.api.nvim_create_autocmd('FileType', {
                 pattern = 'java',
@@ -161,16 +169,20 @@ return {
             })
         end,
     },
-    {
-        "mason-org/mason-lspconfig.nvim",
-        opts = {
-            automatic_enable = { exclude = { 'jdtls' } }
-        },
-        dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
-            "neovim/nvim-lspconfig",
-        },
-    },
+    -- {
+    --     "mason-org/mason-lspconfig.nvim",
+    --     opts = {
+    --         automatic_enable = { exclude = { 'jdtls' } }
+    --     },
+    --     dependencies = {
+    --         { "mason-org/mason.nvim", opts = {} },
+    --         "neovim/nvim-lspconfig",
+    --     },
+    --     requires = {
+    --         "mason-org/mason.nvim",
+    --         "neovim/nvim-lspconfig",
+    --     },
+    -- },
     {
         "jay-babu/mason-nvim-dap.nvim",
         event = "VeryLazy",
