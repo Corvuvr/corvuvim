@@ -1,4 +1,5 @@
 local config = function()
+
     local tree = require("nvim-tree")
 
     vim.keymap.set('n', '<C-n>', function() 
@@ -26,22 +27,18 @@ local config = function()
         }
     })
 
-    local PALETTE_RED   = "#99110F"
-    local PALETTE_GOLD  = "#E3C46F"
-    local PALETTE_BROWN = "#332215"
-    local PALETTE_WHITE = "#ffffff"
-    local PALETTE_BLACK = "#000000"
+    local PALETTE = require("colorscheme")
 
-    vim.api.nvim_set_hl(0, "NvimTreeNormal",            { fg = PALETTE_GOLD, bg = PALETTE_BLACK })
-    vim.api.nvim_set_hl(0, "NvimTreeFolderIcon",        { fg = PALETTE_RED , bold = true })
-    vim.api.nvim_set_hl(0, "NvimTreeFolderName",        { fg = PALETTE_RED , bold = true })
-    vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName",  { fg = PALETTE_RED , bold = true })
-    vim.api.nvim_set_hl(0, "NvimTreeRootFolder",        { fg = PALETTE_GOLD, bold = true })
-    vim.api.nvim_set_hl(0, "NvimTreeSpecialFile",       { fg = PALETTE_GOLD, underline = true })
-    vim.api.nvim_set_hl(0, "NvimTreeIndentMarker",      { fg = PALETTE_GOLD })
-    vim.api.nvim_set_hl(0, "NvimTreeImageFile",         { fg = PALETTE_GOLD })
-    vim.api.nvim_set_hl(0, "NvimTreeSymlink",           { fg = PALETTE_GOLD })
-    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator",      { fg = PALETTE_BROWN, bg = PALETTE_BLACK })
+    vim.api.nvim_set_hl(0, "NvimTreeNormal",            { fg = PALETTE.SAND, bg = PALETTE.BLACK })
+    vim.api.nvim_set_hl(0, "NvimTreeFolderIcon",        { fg = PALETTE.CHERRY , bold = true })
+    vim.api.nvim_set_hl(0, "NvimTreeFolderName",        { fg = PALETTE.CHERRY , bold = true })
+    vim.api.nvim_set_hl(0, "NvimTreeOpenedFolderName",  { fg = PALETTE.CHERRY , bold = true })
+    vim.api.nvim_set_hl(0, "NvimTreeRootFolder",        { fg = PALETTE.SAND, bold = true })
+    vim.api.nvim_set_hl(0, "NvimTreeSpecialFile",       { fg = PALETTE.SAND, underline = true })
+    vim.api.nvim_set_hl(0, "NvimTreeIndentMarker",      { fg = PALETTE.SAND })
+    vim.api.nvim_set_hl(0, "NvimTreeImageFile",         { fg = PALETTE.SAND })
+    vim.api.nvim_set_hl(0, "NvimTreeSymlink",           { fg = PALETTE.SAND })
+    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator",      { fg = PALETTE.BROWN, bg = PALETTE.BLACK })
     vim.api.nvim_set_hl(0, "NvimTreeGitFileIgnoredHL",  { fg = "#777777"    })
 end
 

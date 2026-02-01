@@ -33,4 +33,3 @@ local plugins = require("plugins")
 require("lazy").setup(plugins, {})
 require("mappings").setup()
 require("colorscheme").setup()
-

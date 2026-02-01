@@ -36,7 +36,6 @@ return {
     },
     {
         "sphamba/smear-cursor.nvim",
-        -- enabled = false, -- very slow
         opts = {
             max_kept_windows = 1,
             stiffness = 1,      -- animation speed
@@ -74,12 +73,6 @@ return {
     {
         "nvim-lua/plenary.nvim"
     },
-    -- {
-    --     "nvim-treesitter/playground", -- Provides :Inspect command
-    --     requires = {
-    --         {"nvim-treesitter/nvim-treesitter"}
-    --     },
-    -- }, 
     {
         "ThePrimeagen/refactoring.nvim",
         requires = {
@@ -96,10 +89,56 @@ return {
         lazy = false,
         config = require("configs.nvim-lspconfig"),
     },
+    -- {
+    --     -- Shows LSP pop-ups and provides many utilities
+    --     -- (Currently turned off completions in favor of nvim-cmp)
+    --     "neoclide/coc.nvim",       
+    --     lazy = false, 
+    --     branch = "release", 
+    -- },
     {
-        "neoclide/coc.nvim", -- Shows LSP pop-ups and provides many utilities        
-        lazy = false, 
-        branch = "release", 
+        'hrsh7th/nvim-cmp',             -- Completion plugin
+        dependencies = {
+            'L3MON4D3/LuaSnip',         -- Snippet engine
+            'hrsh7th/cmp-nvim-lsp',     -- LSP source for nvim-cmp
+        },
+        config = function()
+
+            local cmp = require('cmp')
+            cmp.setup({
+                window = {
+                    completion = { 
+                        side = "left",
+                        border = "rounded",
+                        winhighlight = "Normal:CmpNormal,FloatBorder:CmpBorder,CursorLine:CmpLine",
+                    },
+                },
+                mapping = {
+                    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+                    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+                    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                },
+                sources = {
+                    { 
+                        name = 'nvim_lsp',
+                        entry_filter = function(entry, ctx)
+                            return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+                        end
+                    },
+                    -- { name = 'buffer' },
+                    -- { name = 'path' },
+                    -- { name = 'cmdline' },
+                    -- { name = 'luasnip' },
+                },
+            })
+
+            local PALETTE = require("colorscheme")
+            
+            vim.api.nvim_set_hl(0, "CmpNormal", { fg = PALETTE.GOLD, bg = PALETTE.BLACK })
+            vim.api.nvim_set_hl(0, "CmpBorder", { fg = PALETTE.GOLD, bg = PALETTE.BLACK })
+            vim.api.nvim_set_hl(0, "CmpLine",   { fg = PALETTE.GOLD, bg = PALETTE.CHERRY })
+
+        end,
     },
     {
         "mfussenegger/nvim-jdtls",
@@ -108,36 +147,17 @@ return {
             "neovim/nvim-lspconfig",
         },
         event = "VeryLazy",
-        config = function()
-            -- local jdtls = require("jdtls")
-            -- nnoremap <A-o> <Cmd>lua require'jdtls'.organize_imports()<CR>
-            -- nnoremap crv <Cmd>lua require('jdtls').extract_variable()<CR>
-            -- vnoremap crv <Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>
-            -- nnoremap crc <Cmd>lua require('jdtls').extract_constant()<CR>
-            -- vnoremap crc <Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>
-            -- vnoremap crm <Esc><Cmd>lua require('jdtls').extract_method(true)<CR>
-            -- 
-            -- 
-            -- -- If using nvim-dap
-            -- -- This requires java-debug and vscode-java-test bundles, see install steps in this README further below.
-            -- nnoremap <leader>df <Cmd>lua require'jdtls'.test_class()<CR>
-            -- nnoremap <leader>dn <Cmd>lua require'jdtls'.test_nearest_method()<CR>
-            -- vim.keymap.set('n', 'gd',   function() vim.lsp.buf.definition() end)
-
-        end
     },
 
 
     -- DAP
     {
-        "nvim-neotest/nvim-nio",
-    },
-    {
         "mfussenegger/nvim-dap", 
         lazy = false, 
-        config = function(_, opts) 
-            -- require("overseer").enable_dap() 
-        end,
+        dependencies = "stevearc/overseer.nvim", -- support for .vscode/tasks.json
+        -- config = function(_, opts) 
+        --     require("overseer").enable_dap() 
+        -- end,
     },
     {
         "rcarriga/nvim-dap-ui",
@@ -158,18 +178,6 @@ return {
             require("dap-python").setup("python3")
         end,
     },
-    {
-        'stevearc/overseer.nvim', -- support for .vscode/tasks.json
-        ---@module 'overseer'
-        ---@type overseer.SetupOpts
-        opts = {},
-        -- config = function(_, opts)
-        --     -- local path = "/home/test/miniconda3/bin/python"
-        --     require("overseer").setup({
-        --         dap = false,
-        --     })
-        -- end,
-    },
 
     -- MASON
     {
@@ -186,20 +194,6 @@ return {
             })
         end,
     },
-    -- {
-    --     "mason-org/mason-lspconfig.nvim",
-    --     opts = {
-    --         automatic_enable = { exclude = { 'jdtls' } }
-    --     },
-    --     dependencies = {
-    --         { "mason-org/mason.nvim", opts = {} },
-    --         "neovim/nvim-lspconfig",
-    --     },
-    --     requires = {
-    --         "mason-org/mason.nvim",
-    --         "neovim/nvim-lspconfig",
-    --     },
-    -- },
     {
         "jay-babu/mason-nvim-dap.nvim",
         event = "VeryLazy",
