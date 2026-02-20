@@ -89,13 +89,14 @@ return {
         lazy = false,
         config = require("configs.nvim-lspconfig"),
     },
-    -- {
-    --     -- Shows LSP pop-ups and provides many utilities
-    --     -- (Currently turned off completions in favor of nvim-cmp)
-    --     "neoclide/coc.nvim",       
-    --     lazy = false, 
-    --     branch = "release", 
-    -- },
+    {
+        -- Shows LSP pop-ups and provides many utilities
+        -- (Currently turned off completions 
+        -- in favor of nvim-cmp)
+        "neoclide/coc.nvim",       
+        lazy = false, 
+        branch = "release", 
+    },
     {
         'hrsh7th/nvim-cmp',             -- Completion plugin
         dependencies = {
