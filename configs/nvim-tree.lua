@@ -38,7 +38,7 @@ local config = function()
     vim.api.nvim_set_hl(0, "NvimTreeIndentMarker",      { fg = PALETTE.SAND })
     vim.api.nvim_set_hl(0, "NvimTreeImageFile",         { fg = PALETTE.SAND })
     vim.api.nvim_set_hl(0, "NvimTreeSymlink",           { fg = PALETTE.SAND })
-    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator",      { fg = PALETTE.BROWN, bg = PALETTE.BLACK })
+    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator",      { fg = PALETTE.SAND, bg = PALETTE.BLACK })
     vim.api.nvim_set_hl(0, "NvimTreeGitFileIgnoredHL",  { fg = "#777777"    })
 end
 
