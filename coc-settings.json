@@ -9,5 +9,9 @@
             "trace.server": "verbose",
             "filetypes": [ "h", "hpp", "c", "cc", "cpp", "c++", "cxx", "objc", "objcpp", "cuda"]
         }
+    },
+    "diagnostic.messageTarget": "echo",
+    "diagnostic.floatConfig": {
+        "enable": false
     }
 }

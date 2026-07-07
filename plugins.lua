@@ -36,6 +36,7 @@ return {
     },
     {
         "sphamba/smear-cursor.nvim",
+        enabled = false,
         opts = {
             max_kept_windows = 1,
             stiffness = 1,      -- animation speed
@@ -93,7 +94,8 @@ return {
         -- Shows LSP pop-ups and provides many utilities
         -- (Currently turned off completions 
         -- in favor of nvim-cmp)
-        "neoclide/coc.nvim",       
+        "neoclide/coc.nvim",
+        enabled = true,
         lazy = false, 
         branch = "release", 
     },
