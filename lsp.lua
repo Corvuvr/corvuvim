@@ -1,6 +1,6 @@
 vim.lsp.config['zls'] = {
   -- Set to 'zls' if `zls` is in your PATH
-  cmd = { '/usr/bin/zls' },
+  cmd = { "zls" },
   filetypes = { 'zig' },
   root_markers = { 'build.zig' },
   -- There are two ways to set config options:
@@ -18,7 +18,7 @@ vim.lsp.config['zls'] = {
       -- enable_build_on_save = true,
 
       -- omit the following line if `zig` is in your PATH
-      zig_exe_path = '/usr/bin/zig'
+      -- zig_exe_path = "zig"
     }
   },
 }
